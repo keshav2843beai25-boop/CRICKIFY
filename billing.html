@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Crickify</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(13,27,42,0.95);
+      backdrop-filter: blur(12px);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(0,180,216,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 34px;
+      color: #00b4d8;
+      letter-spacing: 3px;
+    }
+
+    .nav-back {
+      margin-left: auto;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: #00b4d8; }
+
+    /* ── LAYOUT ── */
+    .billing-container {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      padding: 40px 20px 60px;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── BOX ── */
+    .box {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    .box-left  { width: 480px; }
+    .box-right { width: 380px; }
+
+    .box h2 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 26px;
+      letter-spacing: 2px;
+      color: #0d1b2a;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #f0f4f8;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #00b4d8;
+      margin: 24px 0 14px;
+    }
+    .section-label:first-of-type { margin-top: 0; }
+
+    /* ── INPUTS ── */
+    .input-group { margin-bottom: 14px; }
+
+    .input-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 5px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 2px solid #ebebeb;
+      font-size: 15px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      outline: none;
+      transition: 0.3s;
+      color: #333;
+    }
+    .input-group input:focus { border-color: #00b4d8; background: #f0fbff; }
+    .input-group input::placeholder { color: #bbb; font-weight: 500; }
+
+    .input-row { display: flex; gap: 12px; }
+    .input-row .input-group { flex: 1; }
+
+    /* ── PAYMENT ── */
+    .payment-method {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pay-card {
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: #f8f9fa;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
+      border: 2px solid transparent;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #444;
+    }
+    .pay-card:hover { border-color: #b2ebf2; background: #f0fbff; }
+    .pay-card.active {
+      border-color: #00b4d8;
+      background: #e7fbff;
+      color: #0077b6;
+    }
+
+    /* ── CONFIRM BTN ── */
+    .confirm-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      margin-top: 28px;
+      background: #0077b6;
+      color: white;
+      font-size: 19px;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 24px rgba(0,119,182,0.35);
+    }
+    .confirm-btn:hover {
+      background: #00b4d8;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,180,216,0.45);
+    }
+
+    /* ── ORDER SUMMARY (right box) ── */
+    #product-details .single-product-img {
+      width: 100%;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      max-height: 200px;
+      object-fit: contain;
+      background: #f8f9fa;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #product-details h3 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: #0d1b2a;
+      margin-bottom: 4px;
+    }
+
+    #product-details .item-count {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    /* ── CHECKOUT SUMMARY MULTI-ITEMS ── */
+    .checkout-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .checkout-item-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed #f0f4f8;
+    }
+
+    .checkout-item-row:last-child {
+      border-bottom: none;
+    }
+
+    .checkout-item-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid #ebebeb;
+      background: #f8f9fa;
+      flex-shrink: 0;
+    }
+
+    .checkout-item-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .checkout-item-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0d1b2a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .checkout-item-meta {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .checkout-item-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0077b6;
+      white-space: nowrap;
+    }
+
+    .divider {
+      border: none;
+      border-top: 2px solid #f0f4f8;
+      margin: 16px 0;
+    }
+
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .price-line.total {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0d1b2a;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 2px solid #f0f4f8;
+    }
+
+    .price-line .free-tag {
+      color: #27ae60;
+      font-weight: 700;
+    }
+
+    /* ── COUPON ── */
+    .coupon-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin: 20px 0 8px;
+      display: block;
+    }
+
+    .coupon {
+      display: flex;
+      gap: 10px;
+    }
+
+    .coupon input {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 2px solid #ebebeb;
+      font-size: 14px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      outline: none;
+      transition: 0.3s;
+      text-transform: uppercase;
+    }
+    .coupon input:focus { border-color: #00b4d8; }
+    .coupon input::placeholder { text-transform: none; color: #bbb; }
+
+    .coupon button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 12px;
+      background: #0d1b2a;
+      color: white;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 16px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+    .coupon button:hover { background: #00b4d8; }
+
+    .coupon-msg {
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+    .coupon-msg.success { color: #27ae60; }
+    .coupon-msg.error   { color: #e63946; }
+
+    /* ── SECURE BADGE ── */
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #aaa;
+      text-transform: uppercase;
+    }
+
+    /* ── POPUP ── */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s;
+      z-index: 9999;
+      backdrop-filter: blur(6px);
+    }
+    .popup-overlay.show { opacity: 1; pointer-events: all; }
+
+    .popup-box {
+      background: white;
+      padding: 52px 48px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      animation: popIn 0.35s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .popup-box .tick { font-size: 64px; display: block; margin-bottom: 16px; }
+    .popup-box h2 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 34px;
+      letter-spacing: 2px;
+      color: #0d1b2a;
+      margin-bottom: 8px;
+    }
+    .popup-box p { font-size: 15px; color: #777; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .box-left, .box-right { width: 100%; }
+      .billing-container { padding: 24px 16px 50px; }
+      .input-row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="logo">🏏 Crickify</div>
+    <a href="cart.html" class="nav-back">← Back to Cart</a>
+  </nav>
+
+  <div class="billing-container">
+
+    <!-- LEFT: Delivery + Payment -->
+    <div class="box box-left">
+
+      <h2>🚚 Delivery Details</h2>
+
+      <p class="section-label">Personal Info</p>
+
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="name" placeholder="e.g. Rahul Sharma">
+      </div>
+
+      <div class="input-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="10-digit mobile number">
+      </div>
+
+      <p class="section-label">Shipping Address</p>
+
+      <div class="input-group">
+        <label>Address</label>
+        <input type="text" id="address" placeholder="House No, Street, Area">
+      </div>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label>City</label>
+          <input type="text" id="city" placeholder="City">
+        </div>
+        <div class="input-group">
+          <label>Pincode</label>
+          <input type="text" id="pincode" placeholder="6-digit pincode">
+        </div>
+      </div>
+
+      <p class="section-label">Payment Method</p>
+
+      <div class="payment-method">
+        <div class="pay-card active" onclick="selectPayment(this,'COD')">
+          💵 Cash on Delivery
+        </div>
+        <div class="pay-card" onclick="selectPayment(this,'UPI')">
+          📱 UPI / PhonePe / GPay
+        </div>
+        <div class="pay-card" onclick="selectPayment(this,'Card')">
+          💳 Debit / Credit Card
+        </div>
+      </div>
+
+      <button class="confirm-btn" onclick="confirmOrder()">
+        Place Order →
+      </button>
+
+      <div class="secure-badge">
+        🔒 100% Secure & Encrypted Checkout
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Order Summary -->
+    <div class="box box-right">
+
+      <h2>🧾 Order Summary</h2>
+
+      <div id="product-details"></div>
+
+      <hr class="divider">
+
+      <div class="price-line">
+        <span>Subtotal</span>
+        <span id="subtotal">₹0</span>
+      </div>
+
+      <div class="price-line">
+        <span>Delivery</span>
+        <span class="free-tag">FREE</span>
+      </div>
+
+      <div class="price-line">
+        <span>Tax (5%)</span>
+        <span id="tax">₹0</span>
+      </div>
+
+      <div class="price-line">
+        <span>Discount</span>
+        <span id="discount-line" style="color:#e63946;">-₹0</span>
+      </div>
+
+      <div class="price-line total">
+        <span>Total</span>
+        <span id="total">₹0</span>
+      </div>
+
+      <span class="coupon-label">Coupon Code</span>
+      <div class="coupon">
+        <input type="text" id="coupon" placeholder="Try SAVE50 or CRICK10">
+        <button onclick="applyCoupon()">Apply</button>
+      </div>
+      <div class="coupon-msg" id="coupon-msg"></div>
+
+    </div>
+
+  </div>
+
+  <!-- SUCCESS POPUP -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box">
+      <span class="tick">🎉</span>
+      <h2>Order Placed!</h2>
+      <p>Redirecting to your orders...</p>
+    </div>
+  </div>
+
+  <script src="billing.js"></script>
+
+</body>
+</html>

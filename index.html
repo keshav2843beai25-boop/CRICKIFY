@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crickify - Premium Cricket Gear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { font-family: 'Rajdhani', sans-serif; background: #f0f4f8; color: #1a1a2e; }
+
+    .home-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 50px;
+      background: rgba(13,27,42,0.97);
+      backdrop-filter: blur(20px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,180,216,0.15);
+    }
+
+    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+
+    .logo-icon {
+      font-size: 42px;
+      line-height: 1;
+      animation: bounce 2.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(-5deg); }
+    }
+
+    .logo-text-wrap { display: flex; flex-direction: column; }
+
+    .logo-text {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 46px;
+      letter-spacing: 5px;
+      color: #00b4d8;
+      line-height: 1;
+      text-shadow: 0 0 25px rgba(0,180,216,0.35);
+    }
+
+    .logo-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-top: -2px;
+    }
+
+    .home-nav-links { display: flex; align-items: center; gap: 4px; }
+
+    .home-nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .home-nav-links a:hover { color: #00b4d8; background: rgba(0,180,216,0.1); }
+
+    .nav-support { border: 1.5px solid rgba(0,180,216,0.35) !important; }
+    .nav-support:hover { border-color: #00b4d8 !important; }
+
+    .nav-callback { border: 1.5px solid rgba(255,255,255,0.15) !important; }
+    .nav-callback:hover { border-color: rgba(255,255,255,0.4) !important; }
+
+    .nav-cart {
+      background: #0077b6 !important;
+      color: white !important;
+      font-size: 15px !important;
+    }
+    .nav-cart:hover { background: #00b4d8 !important; transform: translateY(-2px); }
+
+    .hero {
+      height: 100vh;
+      background: url("https://i.pinimg.com/736x/2d/00/f3/2d00f3b77f9caaae082c257023306c2f.jpg") center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13,27,42,0.94) 0%, rgba(0,50,100,0.65) 55%, rgba(0,180,216,0.15) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      padding: 80px 20px 140px;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #00b4d8;
+      margin-bottom: 18px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(64px, 11vw, 120px);
+      line-height: 0.92;
+      color: white;
+      letter-spacing: 5px;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+
+    .hero-title .accent { color: #00b4d8; display: block; }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      max-width: 580px;
+      line-height: 1.65;
+      margin: 22px 0 38px;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    .btn-primary {
+      padding: 16px 50px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 21px;
+      letter-spacing: 3px;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 30px rgba(0,119,182,0.45);
+    }
+
+    .btn-primary:hover {
+      background: #00b4d8;
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(0,180,216,0.5);
+    }
+
+    .btn-ghost {
+      padding: 14px 40px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 21px;
+      letter-spacing: 3px;
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-ghost:hover { border-color: #00b4d8; color: #00b4d8; transform: translateY(-3px); }
+
+    .stats-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10,20,35,0.88);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(0,180,216,0.2);
+      display: flex;
+      justify-content: center;
+      z-index: 3;
+      animation: fadeUp 1s ease 0.5s both;
+    }
+
+    .stat-item {
+      padding: 20px 50px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 34px;
+      color: #00b4d8;
+      letter-spacing: 2px;
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-top: 5px;
+    }
+
+    .brands-section {
+      background: #0d1b2a;
+      padding: 55px 0 50px;
+      overflow: hidden;
+    }
+
+    .brands-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 32px;
+    }
+
+    .ticker-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ticker-wrap::before,
+    .ticker-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 100px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .ticker-wrap::before { left: 0; background: linear-gradient(to right, #0d1b2a, transparent); }
+    .ticker-wrap::after { right: 0; background: linear-gradient(to left, #0d1b2a, transparent); }
+
+    .ticker {
+      display: flex;
+      width: max-content;
+      animation: ticker 22s linear infinite;
+    }
+    .ticker:hover { animation-play-state: paused; }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .brand-chip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 44px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      cursor: default;
+    }
+
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00b4d8;
+      flex-shrink: 0;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .brand-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 26px;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s;
+    }
+
+    .brand-chip:hover .brand-name { color: #00b4d8; }
+    .brand-chip:hover .brand-dot { animation: none; opacity: 1; transform: scale(1.3); }
+
+    .features-section {
+      padding: 90px 50px;
+      background: #f0f4f8;
+    }
+
+    .section-eyebrow {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #0077b6;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 50px;
+      letter-spacing: 3px;
+      color: #0d1b2a;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 20px;
+      padding: 34px 26px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+
+    .feature-icon { font-size: 38px; display: block; margin-bottom: 18px; }
+
+    .feature-card h3 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: #0d1b2a;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p { font-size: 15px; color: #666; line-height: 1.6; }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9000;
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: white;
+      border-radius: 24px;
+      padding: 44px 38px;
+      width: 90%;
+      max-width: 460px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      position: relative;
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none; border: none;
+      font-size: 26px; cursor: pointer;
+      color: #aaa; line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: #333; }
+
+    .modal-box h2 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 30px;
+      letter-spacing: 2px;
+      color: #0d1b2a;
+      margin-bottom: 6px;
+    }
+
+    .modal-box > div > p {
+      font-size: 15px;
+      color: #777;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .modal-field { margin-bottom: 15px; }
+
+    .modal-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 5px;
+    }
+
+    .modal-field input,
+    .modal-field textarea,
+    .modal-field select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ebebeb;
+      border-radius: 12px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+      color: #333;
+    }
+
+    .modal-field input:focus,
+    .modal-field textarea:focus,
+    .modal-field select:focus { border-color: #00b4d8; }
+
+    .modal-field textarea { resize: vertical; min-height: 85px; }
+
+    .modal-submit {
+      width: 100%;
+      padding: 14px;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 19px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: 0.3s;
+    }
+    .modal-submit:hover { background: #00b4d8; transform: translateY(-2px); }
+
+    .modal-success {
+      text-align: center;
+      padding: 20px 0;
+      display: none;
+    }
+    .modal-success .tick { font-size: 58px; display: block; margin-bottom: 14px; }
+    .modal-success h3 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: #0d1b2a;
+      margin-bottom: 8px;
+    }
+    .modal-success p { font-size: 15px; color: #777; }
+
+    .home-footer {
+      background: #0d1b2a;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 26px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .home-footer span { color: #00b4d8; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .home-nav { padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
+      .logo-text { font-size: 32px; }
+      .logo-icon { font-size: 28px; }
+      .home-nav-links { gap: 2px; }
+      .home-nav-links a { font-size: 12px; padding: 7px 10px; letter-spacing: 1px; }
+      .stat-item { padding: 14px 22px; }
+      .stat-num { font-size: 24px; }
+      .features-section { padding: 60px 20px; }
+    }
+
+    @media (max-width: 520px) {
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { width: 50%; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .home-nav-links { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="home-nav">
+    <div class="logo-wrap">
+      <span class="logo-icon">🏏</span>
+      <div class="logo-text-wrap">
+        <span class="logo-text">Crickify</span>
+        <span class="logo-tag">Premium Cricket Gear</span>
+      </div>
+    </div>
+    <div class="home-nav-links">
+      
+      
+      <a href="#" class="nav-support" onclick="openSupport(); return false;">💬 Support</a>
+      <a href="#" class="nav-callback" onclick="openCallback(); return false;">📞 Callback</a>
+      
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">🏆 Trusted by 10,000+ Players Across India</p>
+      <h1 class="hero-title">
+        Play Like<br>
+        <span class="accent">A Champion</span>
+      </h1>
+      <p class="hero-sub">
+        Your one-stop destination for premium cricket gear —
+        bats, balls, helmets, kits &amp; more. Professional quality. Unbeatable prices.
+      </p>
+      <div class="hero-btns">
+        <a href="products.html" style="text-decoration:none;"><button class="btn-primary">🏏 Shop Now</button></a>
+        <button class="btn-ghost" onclick="openSupport()">💬 Talk to Us</button>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Products</span></div>
+      <div class="stat-item"><span class="stat-num">10K+</span><span class="stat-label">Happy Players</span></div>
+      <div class="stat-item"><span class="stat-num">15+</span><span class="stat-label">Top Brands</span></div>
+      <div class="stat-item"><span class="stat-num">Free</span><span class="stat-label">Delivery</span></div>
+    </div>
+  </section>
+
+  <section class="brands-section">
+    <p class="brands-label">Official Brand Collaborations</p>
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">MRF</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">SG</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Kookaburra</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Adidas</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Puma</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">SS Sporting</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Gray Nicolls</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">DSC</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Shrey</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">TON</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">CEAT</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">New Balance</span></div>
+        <!-- Duplicate for seamless loop -->
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">MRF</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">SG</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Kookaburra</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Adidas</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Puma</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">SS Sporting</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Gray Nicolls</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">DSC</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">Shrey</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">TON</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">CEAT</span></div>
+        <div class="brand-chip"><span class="brand-dot"></span><span class="brand-name">New Balance</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <p class="section-eyebrow">Why Choose Crickify</p>
+    <h2 class="section-title">Built For The Game</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">🏏</span>
+        <h3>Pro-Grade Gear</h3>
+        <p>Every product is sourced from top brands and tested for professional standards.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🚚</span>
+        <h3>Fast Delivery</h3>
+        <p>Pan-India delivery in 3–5 business days. Free shipping on every single order.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💰</span>
+        <h3>Best Prices</h3>
+        <p>Direct brand partnerships mean you always get the best price guaranteed.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>Secure Payments</h3>
+        <p>Pay by UPI, Card, or Cash on Delivery. 100% safe and encrypted checkout.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER START -->
+
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-left">
+
+      <h1 class="footer-logo">
+        Crickify 🏏
+      </h1>
+
+      <div class="download-box">
+
+        <div class="download-icon">
+          ⬇️
+          
+        </div>
+        
+
+        <div>
+          <h3> Download App</h3>
+          <p>Get the best cricket shopping experience</p>
+        </div>
+        
+
+      </div>
+
+      
+
+      <div class="contact-box">
+
+        <p>Get in touch</p>
+
+        <h2>+91 9780233848</h2>
+
+      </div>
+
+    </div>
+
+    <div class="footer-links">
+
+      <div class="footer-column">
+
+        <h3>About</h3>
+
+        <a href="#">About Us</a>
+        <a href="#">Our Team</a>
+        <a href="#">Careers</a>
+        <a href="#">Investors</a>
+        <a href="#">Press</a>
+        <a href="#">Blog</a>
+
+      </div>
+
+      <div class="footer-column">
+
+        <h3>Shop</h3>
+
+        <a href="#">Cricket Bats</a>
+        <a href="#">Balls</a>
+        <a href="#">Gloves</a>
+        <a href="#">Helmets</a>
+        <a href="#">Kit Bags</a>
+        <a href="#">Accessories</a>
+
+      </div>
+
+      <div class="footer-column">
+
+        <h3>Support</h3>
+
+        <a href="#">Help Center</a>
+        <a href="#">Track Order</a>
+        <a href="#">Return Policy</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Contact Us</a>
+
+      </div>
+
+      <div class="footer-column">
+
+        <h3>Community</h3>
+
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+        <a href="#">Twitter</a>
+        <a href="#">Discord</a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- FOOTER END -->
+
+  <!-- SUPPORT MODAL -->
+  <div class="modal-overlay" id="supportModal" onclick="closeOnOverlay(event,'supportModal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('supportModal')">×</button>
+      <div id="support-form-wrap">
+        <h2>💬 Support</h2>
+        <p>We're here to help! Send us your query and we'll respond within 24 hours.</p>
+        <div class="modal-field">
+          <label>Your Name</label>
+          <input type="text" id="sup-name" placeholder="Full Name">
+        </div>
+        <div class="modal-field">
+          <label>Email / Phone</label>
+          <input type="text" id="sup-contact" placeholder="email@example.com or 9XXXXXXXXX">
+        </div>
+        <div class="modal-field">
+          <label>Your Query</label>
+          <textarea id="sup-msg" placeholder="Describe your issue or question..."></textarea>
+        </div>
+        <button class="modal-submit" onclick="submitSupport()">Send Message ✉️</button>
+      </div>
+      <div class="modal-success" id="support-success">
+        <span class="tick">✅</span>
+        <h3>Message Sent!</h3>
+        <p>Our team will get back to you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALLBACK MODAL -->
+  <div class="modal-overlay" id="callbackModal" onclick="closeOnOverlay(event,'callbackModal')">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('callbackModal')">×</button>
+      <div id="callback-form-wrap">
+        <h2>📞 Request Callback</h2>
+        <p>Leave your number and preferred time. We'll call you right back!</p>
+        <div class="modal-field">
+          <label>Your Name</label>
+          <input type="text" id="cb-name" placeholder="Full Name">
+        </div>
+        <div class="modal-field">
+          <label>Phone Number</label>
+          <input type="tel" id="cb-phone" placeholder="10-digit mobile number">
+        </div>
+        <div class="modal-field">
+          <label>Preferred Time</label>
+          <select id="cb-time">
+            <option value="">Select a time slot</option>
+            <option>9 AM – 11 AM</option>
+            <option>11 AM – 1 PM</option>
+            <option>1 PM – 3 PM</option>
+            <option>3 PM – 6 PM</option>
+            <option>6 PM – 8 PM</option>
+          </select>
+        </div>
+        <button class="modal-submit" onclick="submitCallback()">Request Callback 📲</button>
+      </div>
+      <div class="modal-success" id="callback-success">
+        <span class="tick">📲</span>
+        <h3>Request Received!</h3>
+        <p>We'll call you at your preferred time slot. Stay ready!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openSupport() {
+      document.getElementById('supportModal').classList.add('open');
+      document.getElementById('support-form-wrap').style.display = 'block';
+      document.getElementById('support-success').style.display = 'none';
+    }
+    function openCallback() {
+      document.getElementById('callbackModal').classList.add('open');
+      document.getElementById('callback-form-wrap').style.display = 'block';
+      document.getElementById('callback-success').style.display = 'none';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+    function closeOnOverlay(e, id) {
+      if (e.target.id === id) closeModal(id);
+    }
+    function submitSupport() {
+      const name = document.getElementById('sup-name').value.trim();
+      const contact = document.getElementById('sup-contact').value.trim();
+      const msg = document.getElementById('sup-msg').value.trim();
+      if (!name || !contact || !msg) { alert('⚠️ Please fill all fields!'); return; }
+      document.getElementById('support-form-wrap').style.display = 'none';
+      document.getElementById('support-success').style.display = 'block';
+      setTimeout(() => closeModal('supportModal'), 2800);
+    }
+    function submitCallback() {
+      const name = document.getElementById('cb-name').value.trim();
+      const phone = document.getElementById('cb-phone').value.trim();
+      const time = document.getElementById('cb-time').value;
+      if (!name || !phone || !time) { alert('⚠️ Please fill all fields!'); return; }
+      if (!/^\d{10}$/.test(phone)) { alert('⚠️ Enter a valid 10-digit phone number!'); return; }
+      document.getElementById('callback-form-wrap').style.display = 'none';
+      document.getElementById('callback-success').style.display = 'block';
+      setTimeout(() => closeModal('callbackModal'), 2800);
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeModal('supportModal'); closeModal('callbackModal'); }
+    });
+  </script>
+
+<script src="script.js"></script>
+
+
+</body>
+</html>

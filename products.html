@@ -1,0 +1,606 @@
+<!-- FULL CORRECTED products.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Crickify</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <h1 class="logo">Crickify 🏏</h1>
+
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+
+      <a href="index.html">Home</a>
+
+      <a href="cart.html" class="cart-link">
+        🛒 Cart
+        <span id="cart-badge"></span>
+      </a>
+
+      <a href="orders.html">Orders</a>
+
+
+      <div id="profileArea"></div>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Search products..."
+      >
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- PRODUCTS -->
+  <section class="products-page">
+
+    <h2>Our Products</h2>
+
+
+
+    <!-- CATEGORY FILTER -->
+    <div class="category-filter">
+
+      <button
+        class="cat-btn active"
+        onclick="filterCategory('all', this)"
+      >
+        All
+      </button>
+
+      <button
+        class="cat-btn"
+        onclick="filterCategory('bat', this)"
+      >
+        🏏 Bats
+      </button>
+
+      <button
+        class="cat-btn"
+        onclick="filterCategory('ball', this)"
+      >
+        🔴 Balls
+      </button>
+
+      <button
+        class="cat-btn"
+        onclick="filterCategory('gloves', this)"
+      >
+        🧤 Gloves
+      </button>
+
+      <button
+        class="cat-btn"
+        onclick="filterCategory('helmet', this)"
+      >
+        ⛑️ Helmets
+      </button>
+
+      <button
+        class="cat-btn"
+        onclick="filterCategory('kit', this)"
+      >
+        🎒 Kit Bags
+      </button>
+
+      <button
+        class="cat-btn"
+        onclick="filterCategory('stumps', this)"
+      >
+        🏹 Stumps
+      </button>
+
+      <button
+        class="cat-btn"
+        onclick="filterCategory('other', this)"
+      >
+        🛡️ Other Gear
+      </button>
+
+    </div>
+
+
+
+    <!-- PRODUCT CONTAINER -->
+    <div class="product-container">
+      
+
+
+      <!-- Dynamically generated premium products will go here -->
+
+      
+
+    </div>
+
+  </section>
+
+<section class="return-policy">
+
+  <h2>📦 Return Policy</h2>
+
+  <div class="policy-box">
+
+    <p>
+      ✅ Easy 7 Days Return Available
+    </p>
+
+    <p>
+      ✅ 100% Genuine Cricket Products
+    </p>
+
+    <p>
+      ✅ Damaged Product Replacement Support
+    </p>
+
+    <p>
+      ✅ Fast Refund Process
+    </p>
+
+    <p>
+      ⚠️ Product must be unused and in original packaging
+    </p>
+
+  </div>
+
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    &copy; 2026
+    <span>Crickify</span>
+    — All Rights Reserved
+
+  </footer>
+
+
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+
+  <script>
+  // Existing script
+</script>
+
+<script>
+  // AUTO GENERATE UNIQUE CURATED PRODUCTS
+  const productContainer = document.querySelector(".product-container");
+
+  const premiumProducts = [
+
+  // ===== CRICKET BATS =====
+  {
+    category: "bat",
+    name: "SG Sunny Tonny Classic Bat",
+    price: 10999,
+    desc: "Grade 1 English Willow",
+    img: "https://i.pinimg.com/736x/d5/ad/7e/d5ad7e475731663272e413f430cf5948.jpg"
+  },
+  {
+    category: "bat",
+    name: "MRF Genius Grand Edition Bat",
+    price: 9999,
+    desc: "Premium Grade A Willow",
+    img: "https://i.pinimg.com/736x/7e/33/09/7e3309d7bb1f9019757cf0e1271f93a6.jpg"
+  },
+  {
+    category: "bat",
+    name: "Kookaburra Kahuna Pro Bat",
+    price: 8999,
+    desc: "Handcrafted English Willow",
+    img: "https://i.pinimg.com/736x/26/bc/98/26bc980fd538c9df30e929f85a50c0fe.jpg"
+  },
+  {
+    category: "bat",
+    name: "SS Ton Reserve Edition Bat",
+    price: 10999,
+    desc: "Elite Professional Willow",
+    img: "https://i.pinimg.com/736x/28/05/d1/2805d14a86b58ba51554bd63c97a95db.jpg"
+  },
+  {
+    category: "bat",
+    name: "DSC Classic Bat",
+    price: 8999,
+    desc: "Grade 1 English Willow",
+    img: "https://i.pinimg.com/736x/12/81/f9/1281f96ce59064399e41231b37f80241.jpg"
+  },
+  {
+    category: "bat",
+    name: "CEAT Bat",
+    price: 7499,
+    desc: "Premium Grade A Willow",
+    img: "https://i.pinimg.com/736x/a3/68/cd/a368cd5bc78c0245b7050ea4e045facd.jpg"
+  },
+  {
+    category: "bat",
+    name: "Kookaburra Bat",
+    price: 9999,
+    desc: "Handcrafted English Willow",
+    img: "https://i1-e.pinimg.com/736x/0b/f7/86/0bf78638cb3bcbca9ec82b8eb43b132e.jpg"
+  },
+  {
+    category: "bat",
+    name: "SS Bat",
+    price: 9999,
+    desc: "Elite Professional Willow",
+    img: "https://i1-e.pinimg.com/1200x/f8/1a/bf/f81abfa47f2ad30155c720608daef449.jpg"
+  },
+
+
+  // ===== BATTING GLOVES =====
+  {
+    category: "gloves",
+    name: "SG Test Batting Gloves",
+    price: 1799,
+    desc: "Premium Pittards Leather",
+    img: "https://i1-e.pinimg.com/1200x/3d/a4/a1/3da4a1d85b0f17b522590b5d2ea23e3f.jpg"
+  },
+  {
+    category: "gloves",
+    name: "Gray Nicolls Legend Gloves",
+    price: 2299,
+    desc: "High Density Foam Protection",
+    img: "https://i.pinimg.com/736x/01/79/bb/0179bb16105a978f705a347b80fe4839.jpg"
+  },
+  {
+    category: "gloves",
+    name: "SS Ton Gladiator Gloves",
+    price: 1999,
+    desc: "Ergonomic Design & Grip",
+    img: "https://i1-e.pinimg.com/1200x/ca/a3/88/caa388d994c6888941cbcd6f834b077b.jpg"
+  },
+  {
+    category: "gloves",
+    name: "Kookaburra Batting Gloves",
+    price: 2199,
+    desc: "High Density Foam Protection",
+    img: "https://i1-e.pinimg.com/736x/ae/30/48/ae304847bc4ef25954d55a4380153a4b.jpg"
+  },
+  {
+    category: "gloves",
+    name: "GM Gladiator Gloves",
+    price: 1999,
+    desc: "Ergonomic Design & Grip",
+    img: "https://i.pinimg.com/736x/30/6f/81/306f8180d2cf471faad5b43a3be3d228.jpg"
+  },
+
+
+  // ===== BATTING PADS =====
+  {
+    category: "other",
+    name: "SG Test Batting Pads",
+    price: 2799,
+    desc: "Lightweight Cane Protection",
+    img: "https://i1-e.pinimg.com/1200x/4b/06/18/4b061815683910702d6c40dd68403b1d.jpg"
+  },
+  {
+    category: "other",
+    name: "Kookaburra Ghost Pads",
+    price: 3799,
+    desc: "Professional Leg Guards",
+    img: "https://i1-e.pinimg.com/1200x/a8/55/5d/a8555da9479a8410d63c6a94d570d3b7.jpg"
+  },
+  {
+    category: "other",
+    name: "SS Test Batting Pads",
+    price: 2799,
+    desc: "Lightweight Cane Protection",
+    img: "https://i1-e.pinimg.com/736x/55/5e/96/555e963c00e318dc7213fe6f46c25478.jpg"
+  },
+  {
+    category: "other",
+    name: "DSC Batting Pads",
+    price: 3499,
+    desc: "Professional Leg Guards",
+    img: "https://i1-e.pinimg.com/736x/a3/77/88/a3778843640ca19a72d3064a19f7b19b.jpg"
+  },
+
+  // ===== THIGH GUARDS =====
+  {
+    category: "other",
+    name: "ADIDAS Premium Thigh Guard",
+    price: 999,
+    desc: "Dual Layer Safety Cushion",
+    img: "https://i1-e.pinimg.com/1200x/83/cb/5b/83cb5b62004044395a7ac6d25bd55c31.jpg"
+  },
+  {
+    category: "other",
+    name: "SG Elite Thigh Pad",
+    price: 1299,
+    desc: "Flexible Impact Protection",
+    img: "https://i1-e.pinimg.com/1200x/da/12/43/da124357d107b5023da3b6cfb166f3df.jpg"
+  },
+
+
+  // ===== CRICKET BALLS =====
+  {
+    category: "ball",
+    name: "SG Test Red Leather Ball",
+    price: 699,
+    desc: "Alum Tanned Leather",
+    img: "https://i1-e.pinimg.com/736x/73/b9/85/73b985ecaac06ebfbc993d71b38e2816.jpg"
+  },
+  {
+    category: "ball",
+    name: "Kookaburra Turf White Ball",
+    price: 1099,
+    desc: "Official Match Grade Ball",
+    img: "https://i1-e.pinimg.com/1200x/4b/6d/e7/4b6de7f476fe036d715b31ed93161b21.jpg"
+  },
+  {
+    category: "ball",
+    name: "Duke County Red Ball",
+    price: 999,
+    desc: "Premium Hand Stitched",
+    img: "https://i1-e.pinimg.com/736x/a7/dc/92/a7dc926e449e310c5866c98e5e2cd750.jpg"
+  },
+  {
+    category: "ball",
+    name: "TENNIS Ball",
+    price: 179,
+    desc: "Alum Tanned Leather",
+    img: "https://i.pinimg.com/736x/b7/d5/a6/b7d5a6e03edbb0125e1b27612f97b1f7.jpg"
+  },
+  {
+    category: "ball",
+    name: "COSCO Ball",
+    price: 149,
+    desc: "Official Match Grade Ball",
+    img: "https://i1-e.pinimg.com/1200x/44/0a/3e/440a3e4d590eff8a50b40919becef125.jpg"
+  },
+  {
+    category: "ball",
+    name: "WIND Ball",
+    price: 99,
+    desc: "Rubber Ball",
+    img: "https://i1-e.pinimg.com/736x/66/2a/94/662a946cfaf89e7efcb815391b05a65d.jpg"
+  },
+
+  // ===== BOWLING SHOES =====
+  {
+    category: "other",
+    name: "Puma evoSpeed Spike Shoes",
+    price: 4999,
+    desc: "High Grip Cricket Spikes",
+    img: "https://i1-e.pinimg.com/1200x/82/e2/7b/82e27bb0f31f8e353781b9705376f8dc.jpg"
+  },
+  {
+    category: "other",
+    name: "Adidas Howzat Spike Shoes",
+    price: 5999,
+    desc: "Professional Bowling Spikes",
+    img: "https://i1-e.pinimg.com/1200x/07/d3/7e/07d37e40901fd90b58471342fedc2925.jpg"
+  },
+  {
+    category: "other",
+    name: "New Balance CK10 Shoes",
+    price: 7499,
+    desc: "Lightweight Speed Bowling Shoes",
+    img: "https://i1-e.pinimg.com/1200x/e3/74/5d/e3745d6e0be9a929d0caa59c16fd373c.jpg"
+  },
+  {
+    category: "other",
+    name: "ASICS Spike Shoes",
+    price: 6499,
+    desc: "Professional Bowling Spikes",
+    img: "https://i.pinimg.com/736x/3b/b1/cc/3bb1ccca26714ef2d7ed59853be73ab0.jpg"
+  },
+  {
+    category: "other",
+    name: "ADIDAS SPIKES Shoes",
+    price: 7499,
+    desc: "Lightweight Speed Bowling Shoes",
+    img: "https://i1-e.pinimg.com/1200x/75/c8/ef/75c8efc670ba4d4d6363f886e3537775.jpg"
+  },
+
+  // ===== WICKET KEEPING GLOVES =====
+  {
+    category: "gloves",
+    name: "SG Hilite Wicket Keeping Gloves",
+    price: 3299,
+    desc: "Rubber Grip Palm Design",
+    img: "https://i1-e.pinimg.com/1200x/c2/f3/5b/c2f35bc77f2f70e787d09ad0914a6df9.jpg"
+  },
+  {
+    category: "gloves",
+    name: "Kookaburra Beast Keeping Gloves",
+    price: 3999,
+    desc: "Premium Leather Keeping Gloves",
+    img: "https://i1-e.pinimg.com/1200x/5b/39/63/5b3963a6f7e8fc639bb236bd0a596d5e.jpg"
+  },
+  {
+    category: "gloves",
+    name: "DM Wicket Keeping Gloves",
+    price: 3199,
+    desc: "Rubber Grip Palm Design",
+    img: "https://i1-e.pinimg.com/736x/4a/c7/07/4ac7076e497724925500a9fc89db65ac.jpg"
+  },
+  {
+    category: "gloves",
+    name: "GRAY NICOLLS Wicket Keeping Gloves",
+    price: 3999,
+    desc: "Premium Leather Keeping Gloves",
+    img: "https://i1-e.pinimg.com/736x/d9/41/2a/d9412a33b4b56ac7e770d4e81210eea4.jpg"
+  },
+
+  // ===== HELMETS =====
+  {
+    category: "helmet",
+    name: "Shrey Masterclass Air Helmet",
+    price: 3999,
+    desc: "Titanium Grille Protection",
+    img: "https://i.pinimg.com/736x/50/fc/14/50fc1400bcd531c0449577396e661324.jpg"
+  },
+  {
+    category: "helmet",
+    name: "Masuri E Line Helmet",
+    price: 4499,
+    desc: "Advanced Head Guard Safety",
+    img: "https://i1-e.pinimg.com/736x/8d/7f/3f/8d7f3f0241c8ee95abce0f231dcc0068.jpg"
+  },
+  {
+    category: "helmet",
+    name: "Kookaburra Air Helmet",
+    price: 3499,
+    desc: "Titanium Grille Protection",
+    img: "https://i1-e.pinimg.com/736x/6e/53/50/6e5350d5d89b22b278be77002743066e.jpg"
+  },
+  {
+    category: "helmet",
+    name: "GRAY NICOLLS Helmet",
+    price: 3999,
+    desc: "Advanced Head Guard Safety",
+    img: "https://i1-e.pinimg.com/1200x/ea/1e/ad/ea1eadfdadee40107e6513b8ba7dda69.jpg"
+  },
+
+  // ===== ARM GUARD =====
+  {
+    category: "other",
+    name: "SG Test Elbow Guard",
+    price: 699,
+    desc: "Molded Hard Shell Guard",
+    img: "https://i1-e.pinimg.com/736x/34/a5/a7/34a5a719df4ac4c9c280dbcde640d628.jpg"
+  },
+
+  // ===== CHEST GUARD =====
+  {
+    category: "other",
+    name: "SG Chest Guard",
+    price: 1099,
+    desc: "Shock Absorption Chest Pad",
+    img: "https://i1-e.pinimg.com/1200x/66/6c/11/666c11a3324dcd57249b05c0173f341d.jpg"
+  },
+
+  // ===== STUMPS =====
+  {
+    category: "stumps",
+    name: "Kookaburra Wooden Stumps",
+    price: 1499,
+    desc: "Solid Ash Wood Wickets",
+    img: "https://i1-e.pinimg.com/1200x/e4/eb/b9/e4ebb93ce81a4aad4fed42a24f53c3f1.jpg"
+  },
+  {
+    category: "stumps",
+    name: "SG LED Flashing Stumps",
+    price: 2999,
+    desc: "Sensory Impact Wickets",
+    img: "https://i1-e.pinimg.com/736x/fb/ac/6b/fbac6b53add81f039310c6495a94019b.jpg"
+  },
+
+  // ===== NETS =====
+  {
+    category: "other",
+    name: "Portable Cricket Practice Net",
+    price: 4999,
+    desc: "Heavy Duty Outdoor Net",
+    img: "https://i1-e.pinimg.com/1200x/0e/b6/92/0eb692c5bd84610b3f269a6561e2211c.jpg"
+  },
+  {
+    category: "other",
+    name: "Training Side Net System",
+    price: 5999,
+    desc: "Professional Practice Setup",
+    img: "https://i1-e.pinimg.com/736x/fd/87/bf/fd87bf86819bb44ee502cf5c7caf5d4c.jpg"
+  },
+
+  // ===== CONES =====
+  {
+    category: "other",
+    name: "Agility Training Cones Set",
+    price: 499,
+    desc: "Speed & Fielding Practice",
+    img: "https://i1-e.pinimg.com/736x/17/b5/c5/17b5c56fb0314f65812cdb164c079485.jpg"
+  },
+
+  // ===== SHOES SPIKES =====
+  {
+    category: "other",
+    name: "SS Intense Passion Spikes",
+    price: 5499,
+    desc: "All Round Cricket Spikes",
+    img: "https://i.pinimg.com/736x/a1/09/b3/a109b3cf9a81b8bee5004b89b36bf9f0.jpg"
+  },
+  {
+    category: "other",
+    name: "ASICS Gel Gully Cricket Shoes",
+    price: 7999,
+    desc: "Premium Comfort Spikes",
+    img: "https://i1-e.pinimg.com/1200x/8e/c8/37/8ec837fc5346d2a20490d1af2eb6a769.jpg"
+  },
+  {
+    category: "other",
+    name: "Nike Vapor Cricket Spikes",
+    price: 8999,
+    desc: "Elite Fast Bowling Shoes",
+    img: "https://i1-e.pinimg.com/1200x/3b/a9/49/3ba9498fff8ffd4a218b3831d65ec6e2.jpg"
+  },
+
+  {
+    category: "kit",
+    name: "SS KIT BAG",
+    price: 2999,
+    desc: "PREMIUM QUALITY KIT BAG",
+    img: "https://i1-e.pinimg.com/736x/af/e7/d9/afe7d9e340146f719a548e5483758f79.jpg"
+  },
+  {
+    category: "kit",
+    name: "MRF KIT BAG",
+    price: 3999,
+    desc: "PREMIUM QUALITY KIT BAG",
+    img: "https://i1-e.pinimg.com/1200x/f0/54/9a/f0549a2869a7cf1cf1a1c4046643b74d.jpg"
+  },
+  {
+    category: "kit",
+    name: "DSC KIT BAG",
+    price: 3499,
+    desc: "PREMIUM QUALITY KIT BAG",
+    img: "https://i1-e.pinimg.com/1200x/58/81/25/5881252137b50bcd4a9a271c9e8ab03c.jpg"
+  },
+
+
+
+];
+
+  premiumProducts.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.setAttribute("data-category", p.category);
+
+    card.innerHTML = `
+      <div class="card-img-wrapper">
+        <img src="${p.img}" alt="${p.name}">
+      </div>
+      <h3 class="product-name">${p.name}</h3>
+      <p class="price-tag" data-price="${p.price}">₹${p.price.toLocaleString("en-IN")}</p>
+      <p>${p.desc}</p>
+      <div class="card-btns">
+        <button class="btn-buy" onclick="buyNow(this)">Buy Now</button>
+        <button class="btn-cart" onclick="addToCart(this)">+ Cart</button>
+      </div>
+    `;
+
+    productContainer.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
